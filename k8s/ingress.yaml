@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lab
+  namespace: nginx-lab
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/limit-rps: "10"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [lab.local]
+      secretName: lab-tls
+  rules:
+    - host: lab.local
+      http:
+        paths:
+          - path: /app1
+            pathType: Prefix
+            backend:
+              service: { name: app1, port: { number: 80 } }
+          - path: /app2
+            pathType: Prefix
+            backend:
+              service: { name: app2, port: { number: 80 } }
