@@ -9,7 +9,7 @@ jobs:
     name: NGINX reverse proxy (Docker Compose)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Generate TLS certificate
         run: ./scripts/gen-certs.sh
       - name: Start stack
@@ -26,7 +26,7 @@ jobs:
     name: ingress-nginx on Kubernetes (kind)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Create kind cluster
         uses: helm/kind-action@v1
         with:
